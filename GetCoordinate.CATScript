@@ -1,0 +1,27 @@
+'///////////////////////////////////////////////////////////////////////////////////////////////
+'////////////// 29.01.2021 Friday >>> Get coordinate from Point *.CATScript       //////////////
+'////////////// 20:39                                                             //////////////
+'////////////// Author: Selimhan BEK;                                             //////////////
+'///////////////////////////////////////////////////////////////////////////////////////////////
+
+Sub CATMain()
+	On Error Resume Next
+
+    Dim mySel 'As Selection
+    Set mySel = CATIA.ActiveDocument.Selection
+    
+    If mySel.Count < 1 Then
+        Exit Sub
+    End If
+    
+    Dim myPoint 'As HybridShapePointCoord
+    Set myPoint = mySel.Item(1).Value
+    
+    Dim coordArray(2)
+    myPoint.GetCoordinates coordArray
+    
+    MsgBox myPoint.Name & vbCrLf & _
+           "x:" & coordArray(0) & vbCrLf & _
+           "y:" & coordArray(1) & vbCrLf & _
+           "z:" & coordArray(2)
+End Sub
